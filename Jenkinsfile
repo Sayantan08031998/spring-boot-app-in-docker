@@ -20,7 +20,7 @@ pipeline {
     {
       steps{
         sh '''
-          docker run newimage 
+          docker run -p 8000:8000  newimage  
           
         ''' 
       }
