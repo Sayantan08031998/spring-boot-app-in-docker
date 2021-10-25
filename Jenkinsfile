@@ -11,7 +11,7 @@ pipeline {
     {
       steps{
         sh '''
-          docker build -t newImage .
+          docker build -t newimage .
           
         ''' 
       }
@@ -20,7 +20,7 @@ pipeline {
     {
       steps{
         sh '''
-          docker run newImage 
+          docker run newimage 
           
         ''' 
       }
