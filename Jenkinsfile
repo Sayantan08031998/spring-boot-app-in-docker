@@ -18,15 +18,15 @@ pipeline {
                 steps {
                     sh ''
                     sh 'mvn -B -DskipTests clean package'
-                    stash includes: 'target/*.jar', name: 'targetfiles'
+                    //stash includes: 'target/*.jar', name: 'targetfiles'
                 }
             }
-            stage('package') {
-                agent any
-                steps {
-                    unstash 'targetfiles'
-                    sh 'docker build . -t testdocker'
-                }
-            }
+            //stage('package') {
+              //  agent any
+                //steps {
+                  //  unstash 'targetfiles'
+                    //sh 'docker build . -t testdocker'
+                //}
+            //}
         }
 }
