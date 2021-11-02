@@ -1,30 +1,31 @@
 pipeline {
-  agent any 
-  stages {
-    stage('cloning git')
-    {
+    agent none
+        stages {
+            stage('cloning git')
+        
+    {  agent any
       steps{
         checkout scm
       }
      }
-    stage('building image')
-    {
-      steps{
-        sh '''
-          docker build -t newimage .
-          
-        ''' 
-      }
-    }
-     stage('running image')
-    {
-      steps{
-        sh '''
-          docker run -p 8000:8000  newimage  
-          
-        ''' 
-      }
-    }
-    
-  }
+            stage('Build') {
+                agent {
+                    docker {
+                        image 'maven:latest'
+                    }
+                }
+                steps {
+                    sh ''
+                    sh 'mvn -B -DskipTests clean package'
+                    stash includes: 'target/*.jar', name: 'targetfiles'
+                }
+            }
+            stage('package') {
+                agent any
+                steps {
+                    unstash 'targetfiles'
+                    sh 'docker build . -t testdocker'
+                }
+            }
+        }
 }
