@@ -13,7 +13,7 @@ pipeline {
                     docker {
                         image 'maven:latest'
                       
-                       // args 'C:\Users\kshkr\.m2 /var/run/docker.sock:/var/run/docker.sock -u root'
+                       args '-v //var/run/docker.sock:/var/run/docker.sock -u rradha'
                     }
                 }
                 steps {
@@ -22,7 +22,7 @@ pipeline {
                     //stash includes: 'target/*.jar', name: 'targetfiles'
                 }
             }
-            stage('package') {
+            //stage('package') {
               //  agent any
                 //steps {
                   //  unstash 'targetfiles'
