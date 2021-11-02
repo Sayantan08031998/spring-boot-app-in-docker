@@ -12,8 +12,8 @@ pipeline {
                 agent {
                     docker {
                         image 'maven:latest'
-                        args '-v /root/.m2:/root/.m2'
-                        args '-v $HOME/.m2:/root/.m2 /var/run/docker.sock:/var/run/docker.sock -u root'
+                      
+                       // args 'C:\Users\kshkr\.m2 /var/run/docker.sock:/var/run/docker.sock -u root'
                     }
                 }
                 steps {
