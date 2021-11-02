@@ -22,7 +22,7 @@ pipeline {
                     //stash includes: 'target/*.jar', name: 'targetfiles'
                 }
             }
-            //stage('package') {
+            stage('package') {
               //  agent any
                 //steps {
                   //  unstash 'targetfiles'
