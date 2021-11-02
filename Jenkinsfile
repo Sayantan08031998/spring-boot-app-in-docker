@@ -13,7 +13,7 @@ pipeline {
                     docker {
                         image 'maven:latest'
                       
-                       args '-v //var/run/docker.sock:/var/run/docker.sock -u rradha'
+                       args '-v //var/run/docker.sock:/var/run/docker.sock'
                     }
                 }
                 steps {
