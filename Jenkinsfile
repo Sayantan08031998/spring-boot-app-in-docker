@@ -17,8 +17,9 @@ pipeline {
                     }
                 }
                 steps {
-                    sh ''
-                    sh 'mvn -B -DskipTests clean package'
+                    sh 'mvn --version'
+                    //sh ''
+                    //sh 'mvn -B -DskipTests clean package'
                     //stash includes: 'target/*.jar', name: 'targetfiles'
                 }
             }
