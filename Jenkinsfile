@@ -18,7 +18,7 @@ pipeline {
                 }
                 //environment {
                 //  HOME="."
-                }
+               // }
                 steps {
                     //sh 'mvn --version'
                     sh ''
