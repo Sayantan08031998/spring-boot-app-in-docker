@@ -11,9 +11,9 @@ pipeline {
             stage('Build') {
                 agent {
                     docker {
-                        image 'maven:latest'
+                        image 'maven:3.8.1-adoptopenjdk-11'
                       
-                       args '-v /usr/local/bin/docker:/usr/bin/docker'
+                       args '-v /root/.m2:/root/.m2'
                     }
                 }
                 steps {
