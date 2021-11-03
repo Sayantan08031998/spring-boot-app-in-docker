@@ -1,25 +1,23 @@
 pipeline {
-    agent none
-        stages {
-            stage('cloning git')
-        
-    {  agent any
-      steps{
-        checkout scm
-      }
-     }
-            stage('Build') {
-                agent {
-                    docker {
-                        image 'maven:3.8.1-adoptopenjdk-11'
-                        args "-v //tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=//var/maven/.m2"
-                      
-//                        args '-v /root/.m2:/root/.m2'
+    agent any
+    stages {
+        stage('cloning git') {
+            steps{
+                checkout scm
+                }
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.8.3-openjdk-8'
+                    //args "-v //tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=//var/maven/.m2"
+                    //args '-v /root/.m2:/root/.m2'
+                    reuseNode true
                     }
                     
                 }
-                environment {
-                  HOME="."
+                //environment {
+                //  HOME="."
                 }
                 steps {
                     //sh 'mvn --version'
