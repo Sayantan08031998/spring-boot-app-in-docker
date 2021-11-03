@@ -15,6 +15,10 @@ pipeline {
                       
                        args '-v /root/.m2:/root/.m2'
                     }
+                    
+                }
+                environment {
+                  HOME="."
                 }
                 steps {
                     //sh 'mvn --version'
