@@ -10,6 +10,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.8.3-openjdk-8'
+                    run -p 8000:8000  maven:3.8.3-openjdk-8
                     //args "-v //tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=//var/maven/.m2"
                     //args '-v /root/.m2:/root/.m2'
                     reuseNode true
