@@ -70,15 +70,17 @@ pipeline {
 
     stage('Deploy'){
       steps{
-        script{
-          docker.withRegistry(
-            'https://${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-south-1.amazonaws.com',
-            'ecr:ap-south-1:accesskey_secretkey'          
-          ){
-            newimage.push('1')
-          }     
-        }
-	}
-	}
+	       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
+		       script{
+			       docker.withRegistry(
+				       'https://${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-south-1.amazonaws.com',
+				       'ecr:ap-south-1:accesskey_secretkey'
+				   	){
+				       newimage.push('1')
+				       }
+			       }
+		       }
+	      	}
+	    }
 }
 }
