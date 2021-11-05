@@ -17,7 +17,7 @@ pipeline {
       steps{
         sh '''
           docker build -t newimage:1 .
-	  stash includes: 'newimage:1', name: 'createdimage'
+	  //stash includes: 'newimage:1', name: 'createdimage'
           
         ''' 
       }
@@ -78,8 +78,8 @@ pipeline {
 				       
 				       'ecr:ap-south-1:accesskey_secretkey'
 				   	){
-				       unstash 'createdimage'
-				       createdimage.push('1')
+				       //unstash 'createdimage'
+				       newimage.push('1')
 				       }
 			       }
 		       }
