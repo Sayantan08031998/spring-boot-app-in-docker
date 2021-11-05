@@ -1,4 +1,4 @@
-def newimage
+
 pipeline {  
   agent any 
   stages {
@@ -17,6 +17,7 @@ pipeline {
       steps{
         sh '''
           docker build -t newimage:1 .
+	  stash includes: 'newimage:1', name: 'createdimage'
           
         ''' 
       }
@@ -77,7 +78,8 @@ pipeline {
 				       
 				       'ecr:ap-south-1:accesskey_secretkey'
 				   	){
-				       newimage.push('1')
+				       unstash 'createdimage'
+				       createdimage.push('1')
 				       }
 			       }
 		       }
