@@ -32,7 +32,32 @@ pipeline {
       }
     
     }
-	}
+}
+        stage('Approval') {
+           when {
+               not {
+                   equals expected: true, actual: params.autoApprove
+               }
+           }
+
+           steps {
+               script {
+                    def plan = readFile 'New/tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+               }
+           }
+       }
+
+        stage('Apply') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
+                    sh "pwd;cd New; terraform apply -input=false tfplan"
+                }
+            }
+        }	  
+	  
+	  
 //      stage('running image')
 //     {
 //       steps{
