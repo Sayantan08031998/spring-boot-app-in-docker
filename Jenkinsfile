@@ -4,8 +4,13 @@ pipeline {
   stages {
     stage('cloning git'){
       steps{
-        checkout scm
-      }
+	      script{
+		      dir("New")
+                        {
+                            checkout scm
+                        }
+                    }        
+      		}
      }
     stage('building image')
     {
