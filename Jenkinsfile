@@ -1,10 +1,8 @@
 def newimage
-pipeline {
-  
+pipeline {  
   agent any 
   stages {
-    stage('cloning git')
-    {
+    stage('cloning git'){
       steps{
         checkout scm
       }
@@ -22,13 +20,14 @@ pipeline {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
           sh 'pwd;cd terraform ; terraform init -input=false'
-//                     sh 'pwd;cd terraform ; terraform workspace new ${environment}'
-//                     sh 'pwd;cd terraform ; terraform workspace select ${environment}'
+			//                     sh 'pwd;cd terraform ; terraform workspace new ${environment}'
+			//                     sh 'pwd;cd terraform ; terraform workspace select ${environment}'
           sh "pwd;cd terraform ; terraform plan -input=false -out tfplan "
           sh 'pwd;cd terraform ; terraform show -no-color tfplan > tfplan.txt'     
       }
     
     }
+	}
 //      stage('running image')
 //     {
 //       steps{
@@ -45,13 +44,11 @@ pipeline {
           docker.withRegistry(
             'https://${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-south-1.amazonaws.com',
             'ecr:ap-south-1:accesskey_secretkey'          
-          )
-          {
+          ){
             newimage.push('1')
           }     
         }
-      
-  }
+	}
+	}
 }
-    }
-  }
+}
