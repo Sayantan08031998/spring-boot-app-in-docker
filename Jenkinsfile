@@ -13,7 +13,7 @@ pipeline {
     {
       steps{
         sh '''
-          docker build -t newimage .
+          docker build -t newimage:1 .
           
         ''' 
       }
@@ -43,11 +43,11 @@ pipeline {
       steps{
         script{
           docker.withRegistry(
-            'https://<aws-account-no>.dkr.ecr.<ecr-repo-server>.amazonaws.com',
-            'ecr:<ecr-repo-server>:<jenkins-aws-id>'          
+            'https://${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-south-1.amazonaws.com',
+            'ecr:ap-south-1:accesskey_secretkey'          
           )
           {
-            newimage.push('<tag>')
+            newimage.push('1')
           }     
         }
       
