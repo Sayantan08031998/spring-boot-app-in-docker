@@ -10,7 +10,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.8.3-openjdk-8'
-                    customWorkspace 'C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins'
+                    customWorkspace 'C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace'
                     //args "-v //tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=//var/maven/.m2"
                     //args '-v /root/.m2:/root/.m2'
                     //reuseNode true
