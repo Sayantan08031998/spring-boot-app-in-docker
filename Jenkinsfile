@@ -19,11 +19,11 @@ pipeline {
     stage ('TF PLAN'){
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
-          sh 'pwd;cd terraform ; terraform init -input=false'
+          sh 'pwd; terraform init -input=false'
 			//                     sh 'pwd;cd terraform ; terraform workspace new ${environment}'
 			//                     sh 'pwd;cd terraform ; terraform workspace select ${environment}'
-          sh "pwd;cd terraform ; terraform plan -input=false -out tfplan "
-          sh 'pwd;cd terraform ; terraform show -no-color tfplan > tfplan.txt'     
+          sh "pwd; terraform plan -input=false -out tfplan "
+          sh 'pwd; terraform show -no-color tfplan > tfplan.txt'     
       }
     
     }
