@@ -1,6 +1,9 @@
 
 pipeline {  
   agent any 
+  environment {
+    Aws_account_number = ${data.aws_caller_identity.current.account_id}
+  }
   stages {
     stage('cloning git'){
       steps{
@@ -60,7 +63,7 @@ pipeline {
        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
 	       script{
 		       docker.withRegistry(
-			       'https://${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-south-1.amazonaws.com',
+			       'https://Aws_account_number.dkr.ecr.ap-south-1.amazonaws.com',
 			       'ecr:ap-south-1:accesskey_secretkey'
 			       ){
 			       def myimage= docker.build('newrepo')
