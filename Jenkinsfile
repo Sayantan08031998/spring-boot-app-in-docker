@@ -63,7 +63,7 @@ pipeline {
 			       'https://749266080072.dkr.ecr.ap-south-1.amazonaws.com',
 			       'ecr:ap-south-1:accesskey_secretkey'
 			       ){
-			       def myimage= docker.build('new')
+			       def myimage= docker.build('newrepo')
 			       myimage.push('new')   
 				//unstash 'createdimage'
 // 				newimage.push('1')
