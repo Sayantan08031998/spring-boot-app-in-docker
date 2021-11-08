@@ -1,8 +1,9 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('cloning git'){
-      steps{
+      agent any
+         steps{
 	      script{
 		      dir("New")
                         {
