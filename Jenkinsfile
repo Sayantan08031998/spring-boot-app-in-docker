@@ -1,16 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('cloning git') {
-            steps{
-                checkout scm
-                }
-        }
+        stage('cloning git'){
+      steps{
+	      script{
+		      dir("New")
+                        {
+                            checkout scm
+                        }
+                    }        
+      		}
+     }
         stage('Build') {
             agent {
                 docker {
                     image 'maven:3.8.3-openjdk-8'
-                    customWorkspace 'C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace'
+                    //customWorkspace 'C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace'
                     //args "-v //tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=//var/maven/.m2"
                     //args '-v /root/.m2:/root/.m2'
                     //reuseNode true
