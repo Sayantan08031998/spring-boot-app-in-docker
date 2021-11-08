@@ -1,4 +1,4 @@
-
+import main.tf
 pipeline {  
   agent any 
   stages {
@@ -60,7 +60,7 @@ pipeline {
        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
 	       script{
 		       docker.withRegistry(
-			       'https://749266080072.dkr.ecr.ap-south-1.amazonaws.com',
+			       'https://$data.aws_caller_identity.current.account_id.dkr.ecr.ap-south-1.amazonaws.com',
 			       'ecr:ap-south-1:accesskey_secretkey'
 			       ){
 			       def myimage= docker.build('newrepo')
@@ -108,4 +108,5 @@ pipeline {
 
 
 //$data.aws_caller_identity.current.account_id
+//749266080072
 
