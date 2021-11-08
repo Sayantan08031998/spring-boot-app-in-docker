@@ -1,4 +1,4 @@
-import main.tf
+
 pipeline {  
   agent any 
   stages {
