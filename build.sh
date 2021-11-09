@@ -12,7 +12,7 @@ echo "Building $aws_ecr_repository_url_with_tag from $build_folder/Dockerfile"
 # Build image
 docker build -t $aws_ecr_repository_url_with_tag .
 
-aws ecr get-login-password ap-south-1
+aws ecr get-login-password --region ap-south-1
 
 # Push image
 docker push $aws_ecr_repository_url_with_tag
