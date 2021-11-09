@@ -50,4 +50,8 @@ output "account_id" {
   value = data.aws_caller_identity.current.account_id
 }
 
-
+//added after radha's discussion
+provisioner "local-exec" {
+    command = "bash ${path.module}/bin/build.sh ${var.dockerfile_dir} ${var.ecr_repository_url}:${var.docker_image_tag}"
+  }
+}
