@@ -51,7 +51,10 @@ output "account_id" {
 }
 
 //added after radha's discussion
-provisioner "local-exec" {
-    command = "bash ${path.module}/bin/build.sh ${var.dockerfile_dir} ${var.ecr_repository_url}:${var.docker_image_tag}"
+resource "null_resource" "ecr_image" {
+
+  # Runs the build.sh script which builds the dockerfile and pushes to ecr
+  provisioner "local-exec" {
+    command = "bash ${path.module}/bin/build.sh https://${value}.dkr.ecr.ap-south-1.amazonaws.com:${var.docker_image_tag}"
   }
 }
