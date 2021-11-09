@@ -1,12 +1,6 @@
 
 pipeline {  
-  agent any 
-	options {
-		
-                timestamps ()
-                ansiColor('xterm')
-            }
-  
+  agent any   
   stages {
     stage('cloning git'){
       steps{
