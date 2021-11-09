@@ -51,7 +51,7 @@ EOF
 # }
 
 data "aws_ecr_repository" "service" {
-  name = "ecr-repository"
+  name = "newrepo"
 }
 
 output "repository_url" {
