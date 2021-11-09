@@ -58,12 +58,12 @@ output "repository_url" {
  value = data.aws_ecr_repository.service.repository_url
 }
 
-//added after radha's discussion
+# added after radha's discussion
 resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.module}/build.sh $value:latest"
+    command = "bash ${path.root}/build.sh $value:latest"
   }
 }
 
