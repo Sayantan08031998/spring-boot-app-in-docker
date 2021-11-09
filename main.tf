@@ -60,7 +60,9 @@ EOF
 
 # added after radha's discussion
 resource "null_resource" "ecr_image" {
-
+  triggers = {
+    timestamp        = timestamp()
+  }
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
     command = "sh build.sh ${aws_ecr_repository.repo.repository_url}:latest"
