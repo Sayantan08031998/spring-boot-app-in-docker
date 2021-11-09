@@ -44,11 +44,11 @@ resource "aws_ecr_lifecycle_policy" "repo-policy" {
 EOF
 
 }
-data "aws_caller_identity" "current" {}
+# data "aws_caller_identity" "current" {}
 
-output "account_id" {
-  value = data.aws_caller_identity.current.account_id
-}
+# output "account_id" {
+#   value = data.aws_caller_identity.current.account_id
+# }
 
 data "aws_ecr_repository" "service" {
   name = "ecr-repository"
@@ -63,7 +63,7 @@ resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.module}/bin/build.sh https://${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_ecr_repository.service.repository_url}.amazonaws.com:latest"
+    command = "bash ${path.module}/bin/build.sh $value:latest"
   }
 }
 
