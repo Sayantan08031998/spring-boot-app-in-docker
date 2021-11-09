@@ -64,6 +64,7 @@ resource "null_resource" "ecr_image" {
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
     command = "bash /build.sh ${aws_ecr_repository.repo.repository_url}:latest"
+    interpreter = ["bash", "-c"]
   }
 }
 
