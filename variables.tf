@@ -1,11 +1,6 @@
-variable "dockerfile_dir" {
-  type = string
-  description = "The directory that contains the Dockerfile"
-}
-
-variable "ecr_repository_url" {
-  type        = string
-  description = "Full url for the ECR repository"
+variable "region" {
+  type   = "string"
+  region = "ap-south-1"
 }
 
 variable "docker_image_tag" {
