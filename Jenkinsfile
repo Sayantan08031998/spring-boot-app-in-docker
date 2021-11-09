@@ -50,29 +50,28 @@ pipeline {
             }
         }	  
 
-    stage('building image and deploy')
-    {
-      steps{
+//    stage('building image and deploy')
+//      steps{
 //         sh '''
 //           docker build -t newimage:1 .
 // 	  //stash includes: 'newimage:1', name: 'createdimage'
           
 //         ''' 
-       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
-	       script{
-		       docker.withRegistry(
-			       'https://749266080072.dkr.ecr.ap-south-1.amazonaws.com',
-			       'ecr:ap-south-1:accesskey_secretkey'
-			       ){
-			       def myimage= docker.build('newrepo')
-			       myimage.push('new')   
+//        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'accesskey_secretkey']]){
+// 	       script{
+// 		       docker.withRegistry(
+// 			       'https://749266080072.dkr.ecr.ap-south-1.amazonaws.com',
+// 			       'ecr:ap-south-1:accesskey_secretkey'
+// 			       ){
+// 			       def myimage= docker.build('newrepo')
+// 			       myimage.push('new')   
 				//unstash 'createdimage'
 // 				newimage.push('1')
-				 }
-			}
-       }   
-      }
-    }
+// 				 }
+// 			}
+//        }   
+//       }
+//     }
 	  
 	  
 //      stage('running image')
