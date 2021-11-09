@@ -50,20 +50,20 @@ EOF
 #   value = data.aws_caller_identity.current.account_id
 # }
 
-data "aws_ecr_repository" "service" {
-  name = "newrepo"
-}
+# data "aws_ecr_repository" "service" {
+#   name = "newrepo"
+# }
 
-output "repository_url" {
- value = data.aws_ecr_repository.service.repository_url
-}
+# output "repository_url" {
+#  value = data.aws_ecr_repository.service.repository_url
+# }
 
 # added after radha's discussion
 resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.root}/build.sh $value:latest"
+    command = "bash ${path.root}/build.sh ${aws_ecr_repository.repo.repository_url}:latest"
   }
 }
 
