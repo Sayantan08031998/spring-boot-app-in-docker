@@ -55,6 +55,6 @@ resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.module}/bin/build.sh https://${value}.dkr.ecr.ap-south-1.amazonaws.com:${var.docker_image_tag}"
+    command = "bash ${path.module}/bin/build.sh https://${value}.dkr.ecr.${var.region}.amazonaws.com:${var.docker_image_tag}"
   }
 }
