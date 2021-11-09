@@ -63,7 +63,7 @@ resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.module}/bin/build.sh $value:latest"
+    command = "bash ${path.module}/build.sh $value:latest"
   }
 }
 
