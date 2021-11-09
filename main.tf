@@ -50,11 +50,21 @@ output "account_id" {
   value = data.aws_caller_identity.current.account_id
 }
 
+data "aws_ecr_repository" "service" {
+  name = "ecr-repository"
+}
+
+output "repository_url" {
+ value = data.aws_ecr_repository.service.repository_url
+}
+
 //added after radha's discussion
 resource "null_resource" "ecr_image" {
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
-    command = "bash ${path.module}/bin/build.sh https://${value}.dkr.ecr.${var.region}.amazonaws.com:${var.docker_image_tag}"
+    command = "bash ${path.module}/bin/build.sh https://${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_ecr_repository.service.repository_url}.amazonaws.com:latest"
   }
 }
+
+//data.aws_caller_identity.current.account_id
