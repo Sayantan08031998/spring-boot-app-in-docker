@@ -61,7 +61,8 @@ EOF
 # added after radha's discussion
 resource "null_resource" "ecr_image" {
   triggers = {
-    timestamp        = timestamp()
+    #hash = data.external.hash.result["hash"]
+    #timestamp        = timestamp()
   }
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
   provisioner "local-exec" {
