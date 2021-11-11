@@ -5,7 +5,7 @@ pipeline {
     stage('cloning git'){
       steps{
 	      script{
-		      dir("hashfolder")
+		      dir("new")
                         {
                             checkout scm
                         }
